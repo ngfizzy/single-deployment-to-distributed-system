@@ -12,5 +12,4 @@ app.post('/notifications/me', (req, res) => {
     return res.json({ message: 'success', token: Date.now().toString(16) })
 })
 
-
 app.listen(8000, () => console.log('server started on port 8000'))

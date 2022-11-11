@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  auth:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    networks:
+      - local
+  kyc:
+    build:
+      context: ./kyc-service
+      dockerfile: Dockerfile
+    expose:
+      - "3000"
+    deploy:
+      replicas: 2
+      restart_policy:
+          max_attempts: 2
+          condition: on-failure
+    networks:
+      - local
+  notification:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    networks:
+      - local
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - local
+networks:
+  local:
+    driver: bridge
+
+
+
+

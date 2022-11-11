@@ -7,7 +7,7 @@ const app = express();
 app.use(
   "/auth",
   createProxyMiddleware({
-    target: "http://localhost:4000",
+    target: "http://auth:4000",
     changeOrigin: true,
     pathRewrite: { "^/auth": "" },
   })
@@ -16,17 +16,17 @@ app.use(
 app.use(
     "/kyc",
     createProxyMiddleware({
-      target: "http://localhost:6000",
+      target: "http://kyc:6000",
       changeOrigin: true,
-      pathRewrite: { "^/auth": "" },
+      pathRewrite: { "^/kyc": "" },
     })
   );
   app.use(
     "/notifications",
     createProxyMiddleware({
-      target: "http://localhost:8000",
+      target: "http://notification:8000",
       changeOrigin: true,
-      pathRewrite: { "^/auth": "" },
+      pathRewrite: { "^/notifications": "" },
     })
   );
 
